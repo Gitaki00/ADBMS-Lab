@@ -15,7 +15,7 @@ SQL> CREATE TABLE dept_92 (
     dept_id INT PRIMARY KEY,
     dept_name VARCHAR(100) NOT NULL,
     dept_location VARCHAR(100)
-);  2    3    4    5  
+);   
 
 Table created.
 
@@ -27,7 +27,7 @@ SQL> CREATE TABLE employee_92 (
     emp_join_date DATE,  -- Removed the CHECK constraint
     dept_id INT,
     FOREIGN KEY (dept_id) REFERENCES dept_92(dept_id)
-);  2    3    4    5    6    7    8  
+);    
 
 Table created.
 
@@ -38,7 +38,7 @@ SQL> CREATE TABLE support_92 (
     status VARCHAR(3) CHECK (status IN ('Yes', 'No')),
     FOREIGN KEY (emp_id) REFERENCES employee_92(emp_id),
     FOREIGN KEY (dept_id) REFERENCES dept_92(dept_id)
-);  2    3    4    5    6    7    8  
+);   
 
 Table created.
 
@@ -105,27 +105,27 @@ SQL> INSERT INTO dept_92 (dept_id, dept_name, dept_location) VALUES (106, 'Sales
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
 (1, 'John Doe', 60000, TO_DATE('2021-05-15', 'YYYY-MM-DD'), 101);
-  2  
+    
 1 row created.
 
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(2, 'Jane Smith', 55000, TO_DATE('2020-03-10', 'YYYY-MM-DD'), 101);  2  
+(2, 'Jane Smith', 55000, TO_DATE('2020-03-10', 'YYYY-MM-DD'), 101);    
 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(3, 'Alice Johnson', 45000, TO_DATE('2019-07-22', 'YYYY-MM-DD'), 102);  2  
+(3, 'Alice Johnson', 45000, TO_DATE('2019-07-22', 'YYYY-MM-DD'), 102);    
 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(4, 'Bob Brown', 70000, TO_DATE('2021-01-15', 'YYYY-MM-DD'), 103);  2  
+(4, 'Bob Brown', 70000, TO_DATE('2021-01-15', 'YYYY-MM-DD'), 103);    
 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(5, 'Charlie Davis', 30000, TO_DATE('2022-11-30', 'YYYY-MM-DD'), 104);  2  
+(5, 'Charlie Davis', 30000, TO_DATE('2022-11-30', 'YYYY-MM-DD'), 104);    
 
 1 row created.
 
@@ -175,7 +175,7 @@ SQL> SELECT * FROM employee_92 ORDER BY emp_salary DESC;
 
 SQL> SELECT emp_name, emp_salary
 FROM employee_92
-WHERE emp_join_date > TO_DATE('2020-01-01', 'YYYY-MM-DD');  2    3  
+WHERE emp_join_date > TO_DATE('2020-01-01', 'YYYY-MM-DD');    
 
 EMP_NAME       EMP_SALARY
 --------------------------------------------------------------------------------
@@ -202,7 +202,7 @@ Alice Johnson  49500
 
 SQL> SELECT dept_id, SUM(emp_salary) AS total_salary
 FROM employee_92
-GROUP BY dept_id;  2    3  
+GROUP BY dept_id;    
 
    DEPT_ID TOTAL_SALARY
 ---------- ------------
@@ -214,7 +214,7 @@ GROUP BY dept_id;  2    3
 SQL> SELECT dept_id, AVG(emp_salary) AS average_salary
 FROM employee_92
 GROUP BY dept_id
-HAVING AVG(emp_salary) > 60000;  2    3    4  
+HAVING AVG(emp_salary) > 60000;    
 
    DEPT_ID    AVERAGE_SALARY
 ---------- --------------
@@ -225,22 +225,21 @@ SELECT dept_id, COUNT(*) AS employee_count
 FROM employee_92
 WHERE emp_salary > 50000
 GROUP BY dept_id;
-SQL>   2    3    4  
+SQL>    
    DEPT_ID    EMPLOYEE_COUNT
 ---------- --------------
        101    1
        103    1
 
 
-SQL> commit
-  2  ;
+SQL> commit;
 
 Commit complete.
 
 SQL> SELECT dept_id, COUNT(*) AS employee_count
 FROM employee_92
 GROUP BY dept_id
-HAVING COUNT(*) > 3;  2    3    4  
+HAVING COUNT(*) > 3;    
 
    DEPT_ID EMPLOYEE_COUNT
 ---------- --------------
@@ -252,7 +251,7 @@ WHERE EMP_SALARY > (
     SELECT AVG(EMP_SALARY)
     FROM employee_92
     WHERE DEPT_ID = e.DEPT_ID
-);  2    3    4    5    6    7  
+);    
 
 EMP_NAME
 --------------------------------------------------------------------------------
@@ -264,19 +263,19 @@ SQL> INSERT INTO dept_92 (dept_id, dept_name, dept_location) VALUES (107, 'HR', 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(9, 'Elsamma Joshy', 62000, TO_DATE('2023-02-25', 'YYYY-MM-DD'), 107);   2  
+(9, 'Elsamma Joshy', 62000, TO_DATE('2023-02-25', 'YYYY-MM-DD'), 107);     
 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
 (10, 'Mariya Joy', 70000, TO_DATE('2023-02-26', 'YYYY-MM-DD'), 107); 
-  2  
+    
 1 row created.
 
 SQL> SELECT e.EMP_NAME, e.emp_salary
 FROM employee_92 e
 JOIN dept_92 d ON e.dept_id = d.dept_id
-WHERE d.dept_location = 'Ernakulam';  2    3    4  
+WHERE d.dept_location = 'Ernakulam';    
 
 EMP_NAME        EMP_SALARY
 ---------------------------
@@ -285,25 +284,25 @@ Mariya Joy      70000
 
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(11, 'John Abhraham', 70000, TO_DATE('2023-02-26', 'YYYY-MM-DD'), 102);   2  
+(11, 'John Abhraham', 70000, TO_DATE('2023-02-26', 'YYYY-MM-DD'), 102);    
 
 1 row created.
 
 SQL> INSERT INTO employee_92 (emp_id, emp_name, emp_salary, emp_join_date, dept_id) VALUES
-(12, 'Leo Manual', 90000, TO_DATE('2023-02-28', 'YYYY-MM-DD'), 102);  2  
+(12, 'Leo Manual', 90000, TO_DATE('2023-02-28', 'YYYY-MM-DD'), 102);   
 
 1 row created.
 
 SQL> SELECT MAX(EMP_SALARY) AS highest_salary
 FROM employee_92
-WHERE DEPT_ID = 102;  2    3  
+WHERE DEPT_ID = 102;   
 
 HIGHEST_SALARY
 --------------
 	 90000
 
 SQL> SELECT EMP_NAME, EMP_SALARY
-FROM employee_92;  2  
+FROM employee_92;    
 
 EMP_NAME          EMP_SALARY
 --------------------------------
@@ -324,7 +323,7 @@ Charlie Davis     30000
 
 SQL> SELECT EMP_NAME, EMP_SALARY
 FROM employee_92
-WHERE EMP_SALARY > 90000;  2    3  
+WHERE EMP_SALARY > 90000;    
 
 no rows selected
 
@@ -333,7 +332,7 @@ FROM dept_92 d
 JOIN employee_92 e ON d.dept_id = e.dept_id
 GROUP BY d.dept_name
 ORDER BY SUM(e.emp_salary) DESC
-FETCH FIRST 1 ROW ONLY;  2    3    4    5    6  
+FETCH FIRST 1 ROW ONLY;    
 
 DEPT_NAME
 ------------------------------------------
@@ -346,7 +345,7 @@ WHERE e.DEPT_ID IN (
     FROM employee_92
     GROUP BY DEPT_ID
     HAVING COUNT(*) < 10
-);  2    3    4    5    6    7    8  
+);   
 
     EMP_ID              EMP_NAME
 --------------------------------------------------------------------------------
@@ -367,15 +366,49 @@ WHERE e.DEPT_ID IN (
 SQL> CREATE VIEW high_salary_employees AS
 SELECT EMP_NAME, EMP_SALARY
 FROM employee_92
-WHERE EMP_SALARY > 70000;  2    3    4  
+WHERE EMP_SALARY > 70000;   
 
 View created.
 
 SQL> SELECT *                                                           
-FROM high_salary_employees;  2  
+FROM high_salary_employees;   
 
 EMP_NAME            EMP_SALARY
 -------------------------------
 Leo Manual          90000
 
+SQL> CREATE VIEW EmployeeDepartmentSalary AS
+SELECT 
+    e.emp_id,
+    e.emp_name,
+    e.emp_salary,
+    d.dept_name
+FROM 
+    employee_92 e
+JOIN 
+    dept_92 d ON e.dept_id = d.dept_id
+WHERE 
+    e.emp_salary >= 50000;  2    3    4    5    6    7    8    9   10   11   12  
 
+View created.
+
+SQL> SELECT * FROM EmployeeDepartmentSalary;
+
+    EMP_ID   EMP_NAME         EMP_SALARY          DEPT_NAME
+--------------------------------------------------------------------------------
+     6       David Wilson     60000               HR
+     7       Emily Clark      62000               HR
+     8       Emma watson      64000               HR
+     9       Elsamma Joshy    62000               HR
+     10      Mariya Joy       70000               HR
+     11      John Abhraham    70000               Finance
+     12      Leo Manual       90000               Finance
+     2       Jane Smith       55000               HR
+     4       Bob Brown        70000               IT
+
+
+9 rows selected.
+
+SQL> DROP VIEW high_salary_employees;
+
+View dropped.
